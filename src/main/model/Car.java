@@ -1,0 +1,73 @@
+package model;
+
+import java.util.List;
+// Represents a car with a name, an engine, a transmission, and a list of modification parts.
+
+public class Car {
+
+
+    // REQUIRES: carName has a non-zero length
+    // EFFECTS: variables are stored and initialized. 
+    public Car(String carName, Chassis chassis, Engine engine, Transmission transmission, List<BoltOn> mods) {
+
+    }
+
+    // EFFECTS: returns the total horsepower of this car object, 
+    //          including power gains from the engine, 
+    //          transmission, and mods
+    public int calculateHorsepower() {
+        return 0; //stub
+    }
+
+    // EFFECTS: returns the total weight of this car object 
+    //          including weight from the chassis, engine, 
+    //          transmission and mods
+    public int calculateWeight() {
+        return 0; //stub
+    }
+
+    // EFFECTS: returns the quarter mile time of this vehicle in seconds.
+    public double calculateQuarterMileTime() {
+        return 0.0; //stub
+    }
+
+    // MODIFIES: this
+    // REQUIRES: name has a non-zero length
+    // EFFECTS: sets the name of the car
+    public Boolean setName(String name) {
+        return false;
+    }
+    
+
+    // MODIFIES: this
+    // EFFECTS: changes the engine of the car
+    public void setEngine(Engine engine) {
+    }
+
+    // MODIFIES: this
+    // EFFECTS: changes the transmission of the car
+    public void setTransmission(Transmission transmission) {
+    }
+    
+    // MODIFIES: this
+    // EFFECTS: adds a mod to the car's list of mods
+    public boolean addMod(BoltOn boltOn) {
+        return false;
+    }
+    
+    String getName() {
+        return null;
+    }
+    
+    Engine getEngine() {
+        return null;
+    }
+
+    Transmission getTransmission() {
+        return null;
+    }
+
+    List<BoltOn> getMods() {
+        return null;
+    }
+}
