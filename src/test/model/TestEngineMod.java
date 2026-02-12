@@ -23,13 +23,13 @@ public class TestEngineMod {
     }
 
     @Test
-    void testCalculateHorsepowerGain() {
-        assertEquals(150, testTurbo.calculateHorsepowerGain(dummyEngine));
+    void testGetHorsepowerGain() {
+        assertEquals(150, testTurbo.getHorsepowerGain(dummyEngine));
     }
 
     @Test
-    void testCalculateGripMultiplier() {
+    void testGetGripMultiplier() {
         // Engine mods should not affect grip (1.0)
-        assertEquals(1.0, testTurbo.calculateGripMultiplier());
+        assertEquals(1.0, testTurbo.getGripMultiplier());
     }
 }

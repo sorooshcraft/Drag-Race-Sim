@@ -31,7 +31,7 @@ public class Car {
     public int calculateHorsepower() {
         int totalHP = engine.getBaseHorsepower();
         for (Modification m : mods) {
-            totalHP += m.calculateHorsepowerGain(engine);
+            totalHP += m.getHorsepowerGain(engine);
         }
         return totalHP;
     }
@@ -54,7 +54,7 @@ public class Car {
     public double calculateTotalGrip() {
         double totalGrip = 1.0;
         for (Modification m : mods) {
-            totalGrip *= m.calculateGripMultiplier();
+            totalGrip *= m.getGripMultiplier();
         }
         return totalGrip;
     }

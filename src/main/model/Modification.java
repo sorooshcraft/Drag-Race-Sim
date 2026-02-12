@@ -11,10 +11,10 @@ public abstract class Modification {
     }
 
     // EFFECTS: returns the amount of horsepower this mod adds to the given engine
-    public abstract int calculateHorsepowerGain(Engine engine);
+    public abstract int getHorsepowerGain(Engine engine);
 
     // EFFECTS: returns the grip multiplier provided by this mod (1.0 is neutral)
-    public abstract double calculateGripMultiplier();
+    public abstract double getGripMultiplier();
 
     public String getName() {
         return null;
