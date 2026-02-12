@@ -6,18 +6,20 @@ package model;
     // horsepower calculation.
 
 public class EngineMod extends Modification {
+    private int horsepowerBoost;
 
     // REQUIRES: name has a non-zero length and cost >= 0 and hpBoost > 0
     // EFFECTS: constructs an engine modification 
     public EngineMod(String name, int cost, int weightChange, int horsepowerBoost) {
         super(name, cost, weightChange);
+        this.horsepowerBoost = horsepowerBoost;
     }
 
 
     // EFFECTS: returns the amount of horsepower this mod adds to the given engine
     @Override
     public int getHorsepowerGain(Engine engine) {
-        return 0;
+        return horsepowerBoost;
     }
     
     // EFFECTS: returns the grip multiplier provided by this mod (1.0 is neutral)
