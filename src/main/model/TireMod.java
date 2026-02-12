@@ -1,5 +1,10 @@
 package model;
 
+// Represents different tire types and compounds 
+    // (e.g., street tires, drag radials, slicks). Its
+    // primary function is to provide a grip multiplier 
+    // to improve traction during acceleration simulation.
+
 public class TireMod extends Modification {
 
     // REQUIRES: name has non-zero length and gripMultiplier >= 1.0

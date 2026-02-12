@@ -1,5 +1,11 @@
 package model;
 
+
+// Represents the vehicle's transmission system. It defines 
+    // performance characteristics such as the number of
+    // gears, the time it takes to shift (in milliseconds),
+    // and the drivetrain's power transfer efficiency.
+
 public class Transmission {
 
     // REQUIRES: name must be non-empty and weight > 0 and efficiency between 0 and 1

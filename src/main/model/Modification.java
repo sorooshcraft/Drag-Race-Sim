@@ -1,5 +1,8 @@
 package model;
 
+// An abstract class representing a generic aftermarket 
+    // part that can be installed on a car. It defines 
+    // properties like name, cost, and weight change.
 public abstract class Modification {
 
     // REQUIRES: a non-zero length string and cost >= 0

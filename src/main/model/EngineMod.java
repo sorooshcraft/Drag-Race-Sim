@@ -1,5 +1,10 @@
 package model;
 
+// Represents a part which modifies the car to add power 
+    // (e.g., turbochargers, intakes, ECU tunes). Its primary
+    //  function is to increase the vehicle's total 
+    // horsepower calculation.
+
 public class EngineMod extends Modification {
 
     // REQUIRES: name has a non-zero length and cost >= 0 and hpBoost > 0

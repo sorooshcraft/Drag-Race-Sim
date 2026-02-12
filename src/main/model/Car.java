@@ -1,8 +1,11 @@
 package model;
 
 import java.util.List;
-// Represents a car with a name, an engine, a transmission, and a list of modification parts.
 
+// Represents a fully assembled vehicle with a specificed chassis, engine, transmission,
+    // and a list of installed modifications. This class is responsible for aggregating
+    // the stats from all its components to calculate total performance metrics like
+    // horsepower, weight, and quarter-mile time.
 public class Car {
 
     // REQUIRES: carName has a non-zero length

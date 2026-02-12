@@ -1,5 +1,10 @@
 package model;
 
+
+// Represents the chassis/body of the vehicle. It defines the
+    // car's base weight, its aerodynamic properties 
+    // (drag coefficient), and physical limitations such as the 
+    // maximum allowed tire width.
 public class Chassis {
 
     // REQUIRES: name must be a non-empty string, weight > 0
