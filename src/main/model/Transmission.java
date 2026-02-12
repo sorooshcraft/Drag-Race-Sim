@@ -8,28 +8,39 @@ package model;
 
 public class Transmission {
 
+    private String name;
+    private int weight;
+    private int gearCount; 
+    private int shiftTimeMs; 
+    private double efficiency; 
+
     // REQUIRES: name must be non-empty and weight > 0 and efficiency between 0 and 1
     // EFFECTS: constructs a transmission
     public Transmission(String name, int weight, int gearCount, int shiftTimeMs, double efficiency) {
+        this.name = name;
+        this.weight = weight;
+        this.gearCount = gearCount;
+        this.shiftTimeMs = shiftTimeMs;
+        this.efficiency = efficiency;
     }
 
     public String getName() {
-        return null;
+        return name;
     }
 
     public int getWeight() {
-        return 0;
+        return weight;
     }
 
     public int getGearCount() {
-        return 0;
+        return gearCount;
     }
 
     public int getShiftTimeMs() {
-        return 0;
+        return shiftTimeMs;
     }
 
     public double getEfficiency() {
-        return 0.0;
+        return efficiency;
     }
 }
