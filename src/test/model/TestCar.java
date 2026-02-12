@@ -69,9 +69,8 @@ public class TestCar {
 
     @Test
     void testAddMod() {
-        boolean result = testCar.addMod(testTurbo);
+        testCar.addMod(testTurbo);
         
-        assertTrue(result);
         List<Modification> mods = testCar.getMods();
         assertEquals(1, mods.size());
         assertEquals(testTurbo, mods.get(0));

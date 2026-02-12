@@ -21,13 +21,13 @@ public abstract class Modification {
     }
 
     
-    public String getCost() {
-        return null;
+    public int getCost() {
+        return 0;
     }
 
 
-    public String getWeightChange() {
-        return null;
+    public int getWeightChange() {
+        return 0;
     }
 
 }
