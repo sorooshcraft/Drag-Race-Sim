@@ -8,7 +8,7 @@ public class Car {
 
     // REQUIRES: carName has a non-zero length
     // EFFECTS: variables are stored and initialized. 
-    public Car(String carName, Chassis chassis, Engine engine, Transmission transmission, List<BoltOn> mods) {
+    public Car(String carName, Chassis chassis, Engine engine, Transmission transmission, List<Modification> mods) {
 
     }
 
@@ -51,7 +51,7 @@ public class Car {
     
     // MODIFIES: this
     // EFFECTS: adds a mod to the car's list of mods
-    public boolean addMod(BoltOn boltOn) {
+    public boolean addMod(Modification mod) {
         return false;
     }
     
@@ -67,7 +67,7 @@ public class Car {
         return null;
     }
 
-    List<BoltOn> getMods() {
+    List<Modification> getMods() {
         return null;
     }
 }
