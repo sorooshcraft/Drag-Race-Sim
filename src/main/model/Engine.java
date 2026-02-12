@@ -7,30 +7,40 @@ package model;
 
 public class Engine {
 
+    private String name;
+    private int baseHorsepower;
+    private int weight;
+    private int redline; 
+    private int cylinders; 
+
     // REQUIRES: name is non-empty and hp > 0 and weight > 0
     // EFFECTS: constructs an engine
     public Engine(String name, int baseHorsepower, int weight, int redline, int cylinders) {
-
+        this.name = name;
+        this.baseHorsepower = baseHorsepower;
+        this.weight = weight;
+        this.redline = redline;
+        this.cylinders = cylinders;
     }
 
     public String getName() {
-        return null;
+        return name;
     }
 
     public int getBaseHorsepower() {
-        return 0;
+        return baseHorsepower;
     }
 
     public int getWeight() {
-        return 0;
+        return weight;
     }
 
     public int getRedline() {
-        return 0;
+        return redline;
 
     }
     
     public int getCylinders() {
-        return 0;
+        return cylinders;
     }
 }
