@@ -7,10 +7,13 @@ package model;
 
 public class TireMod extends Modification {
 
+    private double gripMultiplier;
+
     // REQUIRES: name has non-zero length and gripMultiplier >= 1.0
     // EFFECTS: constructs a tire modification. 
     public TireMod(String name, int cost, double gripMultiplier, int weightChange) {
         super(name, cost, weightChange);
+        this.gripMultiplier = gripMultiplier;
     }
 
     // EFFECTS: returns the amount of horsepower this mod adds to the given engine
@@ -22,6 +25,6 @@ public class TireMod extends Modification {
     // EFFECTS: returns the grip multiplier provided by this mod (1.0 is neutral)
     @Override
     public double getGripMultiplier() {
-        return 0;
+        return gripMultiplier;
     }
 }
