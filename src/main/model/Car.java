@@ -5,10 +5,9 @@ import java.util.List;
 
 public class Car {
 
-
     // REQUIRES: carName has a non-zero length
     // EFFECTS: variables are stored and initialized. 
-    public Car(String carName, Chassis chassis, Engine engine, Transmission transmission, List<Modification> mods) {
+    public Car(String carName, Chassis chassis, Engine engine, Transmission transmission) {
 
     }
 
@@ -26,10 +25,22 @@ public class Car {
         return 0; //stub
     }
 
+// EFFECTS: returns a grip score based on tires, chassis, and weight
+    public double calculateTotalGrip() {
+        return 1.0;
+    }
+
     // EFFECTS: returns the quarter mile time of this vehicle in seconds.
     public double calculateQuarterMileTime() {
         return 0.0; //stub
     }
+
+    // MODIFIES: this
+    // EFFECTS: adds a mod to the car's list of mods
+    public boolean addMod(Modification mod) {
+        return false;
+    }
+    
 
     // MODIFIES: this
     // REQUIRES: name has a non-zero length
@@ -50,11 +61,15 @@ public class Car {
     }
     
     // MODIFIES: this
-    // EFFECTS: adds a mod to the car's list of mods
-    public boolean addMod(Modification mod) {
-        return false;
+    // EFFECTS: changes the chassis of the car
+    public void setChassis(Chassis chassis) {
     }
+
     
+    List<Modification> getMods() {
+        return null;
+    }
+
     String getName() {
         return null;
     }
@@ -67,7 +82,8 @@ public class Car {
         return null;
     }
 
-    List<Modification> getMods() {
+    Chassis getChassis() {
         return null;
     }
+
 }
