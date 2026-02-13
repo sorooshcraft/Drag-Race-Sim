@@ -11,7 +11,7 @@ public class TireMod extends Modification {
 
     // REQUIRES: name has non-zero length and gripMultiplier >= 1.0
     // EFFECTS: constructs a tire modification. 
-    public TireMod(String name, int cost, double gripMultiplier, int weightChange) {
+    public TireMod(String name, int cost, int weightChange, double gripMultiplier) {
         super(name, cost, weightChange);
         this.gripMultiplier = gripMultiplier;
     }

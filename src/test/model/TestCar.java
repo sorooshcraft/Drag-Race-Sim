@@ -26,7 +26,7 @@ public class TestCar {
         testTransmission = new Transmission("Race Auto", 150, 4, 100, 0.90);
         testCar = new Car("Project X", testChassis, testEngine, testTransmission);
         testTurbo = new EngineMod("Huge Turbo", 2000, 50, 200);
-        testSlicks = new TireMod("Drag Slicks", 500, 2.0, -20);
+        testSlicks = new TireMod("Drag Slicks", 500, 20, 2.0);
     }
 
     @Test
