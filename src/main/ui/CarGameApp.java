@@ -158,6 +158,7 @@ public class CarGameApp {
         System.out.println("Modifying " + c.getName());
         System.out.println("1 -> Custom Engine Mod (Turbo, Intake, etc)");
         System.out.println("2 -> Custom Tire Mod (Slicks, Radials, etc)");
+        System.out.println("3 -> Custom Body Panel Mod (Carbon hood, Spoiler, etc)");
         System.out.print("Choice: ");
         int choice = input.nextInt();
 
@@ -165,6 +166,8 @@ public class CarGameApp {
             addCustomEngineMod(c);
         } else if (choice == 2) {
             addCustomTireMod(c);
+        } else if (choice == 3) {
+            addCustomBodyPanelMod(c);
         } else {
             System.out.println("Invalid choice.");
         }
@@ -200,6 +203,23 @@ public class CarGameApp {
 
         c.addMod(new TireMod(name, cost, w, grip));
         System.out.println("Tires installed!");
+    }
+
+
+    // MODIFIES: c
+    // EFFECTS: prompts user for tire mod specs and adds to car
+    private void addCustomBodyPanelMod(Car c) {
+        System.out.print("Body Part Name: "); 
+        String name = input.next();
+        System.out.print("Cost: "); 
+        int cost = input.nextInt();
+        System.out.print("Weight Change: "); 
+        int w = input.nextInt();
+        System.out.print("Grip Multiplier (e.g. 1.5): "); 
+        double aeroGrip = input.nextDouble();
+
+        c.addMod(new BodyPanelMod(name, cost, w, aeroGrip));
+        System.out.println("Body part installed!");
     }
 
 // EFFECTS: determines if race is solo or head-to-head
