@@ -26,7 +26,7 @@ public class TestCar {
         testTransmission = new Transmission("Race Auto", 150, 4, 100, 0.90);
         testCar = new Car("Project X", testChassis, testEngine, testTransmission);
         testTurbo = new EngineMod("Huge Turbo", 2000, 50, 200);
-        testSlicks = new TireMod("Drag Slicks", 500, 20, 2.0);
+        testSlicks = new TireMod("Drag Slicks", 500, 10, 2.0);
     }
 
     @Test
@@ -87,9 +87,10 @@ public class TestCar {
     @Test
     void testCalculateWeight() {
         assertEquals(1650, testCar.calculateWeight());
-
         testCar.addMod(testTurbo);
         assertEquals(1700, testCar.calculateWeight());
+        testCar.addMod(testSlicks);
+        assertEquals(1710, testCar.calculateWeight());
     }
 
     @Test
@@ -102,8 +103,16 @@ public class TestCar {
 
     @Test
     void testCalculateQuarterMileTime() {
-        // Not implemented yet, so not testable for now
-        double time = testCar.calculateQuarterMileTime();
-        assertTrue(time >= 0);
+        double expectedBase = 5.825 * Math.pow(1650.0 / 400.0, 0.333);
+        assertEquals(expectedBase, testCar.calculateQuarterMileTime(), 0.0001);
+
+        testCar.addMod(testTurbo);
+        double expectedTurbo = 5.825 * Math.pow(1700.0 / 600.0, 0.333);
+        assertEquals(expectedTurbo, testCar.calculateQuarterMileTime(), 0.0001);
+
+        testCar.addMod(testSlicks);
+        double expectedSlicksRaw = 5.825 * Math.pow(1710.0 / 600.0, 0.333);
+        double expectedSlicksFinal = expectedSlicksRaw / Math.sqrt(2.0);
+        assertEquals(expectedSlicksFinal, testCar.calculateQuarterMileTime(), 0.0001);
     }
 }
