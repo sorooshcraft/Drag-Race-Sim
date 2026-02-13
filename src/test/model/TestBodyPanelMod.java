@@ -4,7 +4,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-public class BodyPanelModTest {
+public class TestBodyPanelMod {
 
     private BodyPanelMod carbonHood;
     private BodyPanelMod hugeSpoiler;
