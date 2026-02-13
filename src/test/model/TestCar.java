@@ -14,6 +14,8 @@ public class TestCar {
     private Chassis testChassis;
     private Engine testEngine;
     private Transmission testTransmission;
+    private BodyPanelMod testSpoiler;
+
     
     // Sample Modifications
     private EngineMod testTurbo;
@@ -27,6 +29,8 @@ public class TestCar {
         testCar = new Car("Project X", testChassis, testEngine, testTransmission);
         testTurbo = new EngineMod("Huge Turbo", 2000, 50, 200);
         testSlicks = new TireMod("Drag Slicks", 500, 10, 2.0);
+        testSpoiler = new BodyPanelMod("Big Wing", 300, 15, 1.1);
+
     }
 
     @Test
@@ -91,6 +95,8 @@ public class TestCar {
         assertEquals(1700, testCar.calculateWeight());
         testCar.addMod(testSlicks);
         assertEquals(1710, testCar.calculateWeight());
+        testCar.addMod(testSpoiler);
+        assertEquals(1725, testCar.calculateWeight());
     }
 
     @Test
@@ -99,6 +105,9 @@ public class TestCar {
 
         testCar.addMod(testSlicks);
         assertEquals(2.0, testCar.calculateTotalGrip(), 0.001);
+
+        testCar.addMod(testSpoiler);
+        assertEquals(2.2, testCar.calculateTotalGrip(), 0.001);
     }
 
     @Test
