@@ -49,6 +49,7 @@ public class CarGameApp {
         System.out.println("Select from:");
         System.out.println("\tc -> create a custom car");
         System.out.println("\tv -> view garage");
+        System.out.println("\td -> view car details");
         System.out.println("\tm -> modify a car");
         System.out.println("\tr -> race a car");
         System.out.println("\tq -> quit");
@@ -62,6 +63,8 @@ public class CarGameApp {
             doCreateCar();
         } else if (command.equals("v")) {
             doViewGarage();
+        } else if (command.equals("d")) {
+            doViewCarDetails();
         } else if (command.equals("m")) {
             doModifyCar();
         } else if (command.equals("r")) {
@@ -307,5 +310,50 @@ public class CarGameApp {
             System.out.println("Invalid car ID.");
             return null;
         }
+    }
+
+    // EFFECTS: selects a car and prints full detailed specifications
+    private void doViewCarDetails() {
+        Car c = selectCar();
+        if (c == null) {
+            return;
+        }
+
+        System.out.println("\n==================================");
+        System.out.println("   DETAILS: " + c.getName().toUpperCase());
+        System.out.println("==================================");
+        
+        printComponentStats(c);
+        printModsList(c);
+    }
+
+    // EFFECTS: prints the details of the base components
+    private void printComponentStats(Car c) {
+        Engine e = c.getEngine();
+        Chassis ch = c.getChassis();
+        Transmission t = c.getTransmission();
+
+        System.out.println(" BASE COMPONENTS");
+        System.out.println(" [ENGINE]  " + e.getName() 
+                + " (" + e.getCylinders() + " cyl, " + e.getBaseHorsepower() + " base hp)");
+        System.out.println(" [CHASSIS] " + ch.getName() 
+                + " (Drag: " + ch.getDragCoefficient() + ")");
+        System.out.println(" [TRANS]   " + t.getName() 
+                + " (" + t.getGearCount() + " Speed)");
+        System.out.println("----------------------------------");
+    }
+
+    // EFFECTS: prints the list of installed modifications
+    private void printModsList(Car c) {
+        System.out.println(" INSTALLED MODIFICATIONS");
+        if (c.getMods().isEmpty()) {
+            System.out.println(" (Stock - No mods installed)");
+        } else {
+            for (Modification m : c.getMods()) {
+                System.out.println(" + " + m.getName() 
+                        + " [Cost: " + m.getCost() + " | Wt: " + m.getWeightChange() + "]");
+            }
+        }
+        System.out.println("==================================");
     }
 }
