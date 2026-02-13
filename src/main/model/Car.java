@@ -112,23 +112,23 @@ public class Car {
     }
 
     
-    List<Modification> getMods() {
+    public List<Modification> getMods() {
         return mods;
     }
 
-    String getName() {
+    public String getName() {
         return name;
     }
     
-    Engine getEngine() {
+    public Engine getEngine() {
         return engine;
     }
 
-    Transmission getTransmission() {
+    public Transmission getTransmission() {
         return transmission;
     }
 
-    Chassis getChassis() {
+    public Chassis getChassis() {
         return chassis;
     }
 

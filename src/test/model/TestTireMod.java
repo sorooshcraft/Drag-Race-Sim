@@ -11,7 +11,7 @@ public class TestTireMod {
 
     @BeforeEach
     void runBefore() {
-        testSlicks = new TireMod("Racing Slicks", 800, 2.5, 30);
+        testSlicks = new TireMod("Racing Slicks", 800, 2.5, -30);
         dummyEngine = new Engine("Dummy", 100, 100, 100, 4);
     }
 
@@ -19,8 +19,7 @@ public class TestTireMod {
     void testConstructorAndGetters() {
         assertEquals("Racing Slicks", testSlicks.getName());
         assertEquals(800, testSlicks.getCost());
-        assertEquals(0, testSlicks.getWeightChange()); // Tires initialized with 0 weight change
-        assertEquals(30, testSlicks.getWeightChange());
+        assertEquals(-30, testSlicks.getWeightChange());
     }
 
     @Test
