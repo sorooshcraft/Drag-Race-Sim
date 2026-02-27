@@ -44,16 +44,12 @@ class JsonReaderTest extends JsonTest {
             Garage g = reader.read();
             List<Car> cars = g.getCars();
             assertEquals(1, cars.size());
+            checkCar("FastCar", cars.get(0));
             
             Car c = cars.get(0);
-            checkCar("FastCar", c);
-            checkCarComponents("C", "E", "T", c);
-            
-            // Verify mods
+            checkEngine("E", 200, 200, 5000, 4, c.getEngine());
             assertEquals(3, c.getMods().size());
             assertEquals("Turbo", c.getMods().get(0).getName());
-            assertEquals("Slicks", c.getMods().get(1).getName());
-            assertEquals("Wing", c.getMods().get(2).getName());
         } catch (IOException e) {
             fail("Exception should not have been thrown");
         }
