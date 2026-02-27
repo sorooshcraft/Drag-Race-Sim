@@ -2,9 +2,13 @@ package model;
 
 import java.util.List;
 import java.util.ArrayList;
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import persistence.Writable;
 
 // Represents a collection of Cars.
-public class Garage {
+public class Garage implements Writable {
 
     private List<Car> cars;
 
@@ -34,4 +38,19 @@ public class Garage {
     public List<Car> getCars() {
         return cars;
     }
+
+
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        JSONArray jsonArray = new JSONArray();
+
+        for (Car c : cars) {
+            jsonArray.put(c.toJson());
+        }
+
+        json.put("cars", jsonArray);
+        return json;
+    }
+
 }
