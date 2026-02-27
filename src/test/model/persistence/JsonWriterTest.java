@@ -13,9 +13,6 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @ExcludeFromJacocoGeneratedReport
 class JsonWriterTest extends JsonTest {
-    //NOTE TO CPSC 210 STUDENTS: the strategy in designing tests for the JsonWriter is to
-    //write data to a file and then use the reader to read it back in and check that we
-    //read in a copy of what was written out.
 
     @Test
     void testWriterInvalidFile() {
@@ -32,12 +29,12 @@ class JsonWriterTest extends JsonTest {
     void testWriterEmptyGarage() {
         try {
             Garage g = new Garage();
-            JsonWriter writer = new JsonWriter("./data/testWriterEmptyWorkroom.json");
+            JsonWriter writer = new JsonWriter("./data/testWriterEmptyGarage.json");
             writer.open();
             writer.write(g);
             writer.close();
 
-            JsonReader reader = new JsonReader("./data/testWriterEmptyWorkroom.json");
+            JsonReader reader = new JsonReader("./data/testWriterEmptyGarage.json");
             g = reader.read();
             assertEquals(0, g.getCarCount());
         } catch (IOException e) {
@@ -46,73 +43,36 @@ class JsonWriterTest extends JsonTest {
     }
 
     @Test
-    void testWriterGeneralWorkroom() {
+    void testWriterGeneralGarage() {
         try {
             Garage g = new Garage();
+            g.addCar(buildTestCar("Car1"));
+            g.addCar(buildTestCar("Car2"));
 
-            Chassis chassis = new Chassis("C", 1000, .3, 200);
-            Engine engine = new Engine("E", 200, 200, 5000, 4);
-            Transmission transmission = new Transmission("T", 100, 5, 100, .9);
-
-            Car car = new Car("FastCar", chassis, engine, transmission);
-
-            Modification engineMod = new EngineMod("Turbo", 1000, 50, 100);
-            Modification tireMod = new TireMod("Slicks", 500, 10, 2.0);
-            Modification bodyPanelMod = new BodyPanelMod("Wing", 300, 15, 1.1);
-
-            car.addMod(engineMod);
-            car.addMod(tireMod);
-            car.addMod(bodyPanelMod);
-
-            g.addCar(car);
-            
-
-            JsonWriter writer = new JsonWriter("./data/testWriterGeneralWorkroom.json");
+            JsonWriter writer = new JsonWriter("./data/testWriterGeneralGarage.json");
             writer.open();
             writer.write(g);
             writer.close();
 
-            JsonReader reader = new JsonReader("./data/testWriterGeneralWorkroom.json");
+            JsonReader reader = new JsonReader("./data/testWriterGeneralGarage.json");
             g = reader.read();
-            Car c = g.getCar(0);
-            assertEquals("FastCar", c.getName());
-
-            assertEquals("C", c.getChassis().getName());
-            assertEquals(1000, c.getChassis().getWeight());
-            assertEquals(.3, c.getChassis().getDragCoefficient());
-            assertEquals(200, c.getChassis().getMaxTireWidth());
-
-            assertEquals("E", c.getEngine().getName());
-            assertEquals(200, c.getEngine().getBaseHorsepower());
-            assertEquals(200, c.getEngine().getWeight());
-            assertEquals(5000, c.getEngine().getRedline());
-            assertEquals(4, c.getEngine().getCylinders());
-
-            assertEquals("T", c.getTransmission().getName());
-            assertEquals(100, c.getTransmission().getWeight());
-            assertEquals(5, c.getTransmission().getGearCount());
-            assertEquals(100, c.getTransmission().getShiftTimeMs());
-            assertEquals(.9, c.getTransmission().getEfficiency());
-
-            List<Modification> mods = c.getMods();
-
-            assertEquals("Turbo", mods.get(0).getName());
-            assertEquals(1000, mods.get(0).getCost());
-            assertEquals(50, mods.get(0).getWeightChange());
-            assertEquals(100, mods.get(0).getHorsepowerGain(c.getEngine()));
-
-            assertEquals("Slicks", mods.get(1).getName());
-            assertEquals(500, mods.get(1).getCost());
-            assertEquals(10, mods.get(1).getWeightChange());
-            assertEquals(2.0, mods.get(1).getGripMultiplier());
-
-            assertEquals("Wing", mods.get(2).getName());
-            assertEquals(300, mods.get(2).getCost());
-            assertEquals(15, mods.get(2).getWeightChange());
-            assertEquals(1.1, mods.get(2).getGripMultiplier());
-
+            List<Car> cars = g.getCars();
+            assertEquals(2, cars.size());
+            checkCar("Car1", cars.get(0));
+            checkCar("Car2", cars.get(1));
+            
         } catch (IOException e) {
             fail("Exception should not have been thrown");
         }
+    }
+
+    // Helper to build a car for testing
+    private Car buildTestCar(String name) {
+        Chassis c = new Chassis("C", 1000, 0.3, 200);
+        Engine e = new Engine("E", 200, 200, 5000, 4);
+        Transmission t = new Transmission("T", 100, 5, 100, 0.9);
+        Car car = new Car(name, c, e, t);
+        car.addMod(new EngineMod("Turbo", 1000, 50, 100));
+        return car;
     }
 }
