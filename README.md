@@ -18,3 +18,6 @@ This project interests me because it combines the two things that interest me th
 *   As a user, I want to be able to view a list of all the cars currently stored in my garage.
 *   As a user, I want to be able to select a specific car from my garage and modify its components, such as changing its engine parts or tires.
 *   As a user, I want to select one or two cars from my garage and simulate a drag race to see the final race times and results.
+*   As a user, I want to be able to save my garage file.
+*   As a user, when I select the quit option from the application menu, I want to be reminded to save my garage to file and have the option to do so or not.
+*   As a user, when I start the application, I want to be given the option to load my garage from file.
