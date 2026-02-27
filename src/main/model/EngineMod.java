@@ -1,5 +1,9 @@
 package model;
 
+import org.json.JSONObject;
+
+import persistence.Writable;
+
 // Represents a part which modifies the car to add power 
     // (e.g., turbochargers, intakes, ECU tunes). Its primary
     //  function is to increase the vehicle's total 
@@ -26,6 +30,14 @@ public class EngineMod extends Modification {
     @Override
     public double getGripMultiplier() {
         return 1.0;
+    }
+
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = super.toJson();
+        json.put("type", "EngineMod");
+        json.put("horsepowerBoost", horsepowerBoost);
+        return json;
     }
 
 }

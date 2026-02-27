@@ -1,5 +1,7 @@
 package model;
 
+import org.json.JSONObject;
+
 // Represents different tire types and compounds 
     // (e.g., street tires, drag radials, slicks). Its
     // primary function is to provide a grip multiplier 
@@ -26,5 +28,13 @@ public class TireMod extends Modification {
     @Override
     public double getGripMultiplier() {
         return gripMultiplier;
+    }
+
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = super.toJson();
+        json.put("type", "TireMod");
+        json.put("gripMultiplier", gripMultiplier);
+        return json;
     }
 }

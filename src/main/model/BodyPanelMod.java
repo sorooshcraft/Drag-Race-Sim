@@ -1,5 +1,7 @@
 package model;
 
+import org.json.JSONObject;
+
 // Represents bodywork modifications (e.g., Carbon Fiber Hood, Spoilers).
 // These parts primarily affect Weight and Grip (aerodynamic downforce).
 public class BodyPanelMod extends Modification {
@@ -24,5 +26,13 @@ public class BodyPanelMod extends Modification {
     @Override
     public double getGripMultiplier() {
         return aeroGripMultiplier;
+    }
+
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = super.toJson();
+        json.put("type", "BodyPanelMod");
+        json.put("aeroGripMultiplier", aeroGripMultiplier);
+        return json;
     }
 }

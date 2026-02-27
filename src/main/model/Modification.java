@@ -1,9 +1,13 @@
 package model;
 
+import org.json.JSONObject;
+
+import persistence.Writable;
+
 // An abstract class representing a generic aftermarket 
     // part that can be installed on a car. It defines 
     // properties like name, cost, and weight change.
-public abstract class Modification {
+public abstract class Modification implements Writable {
 
     protected String name;
     protected int cost;
@@ -35,6 +39,15 @@ public abstract class Modification {
 
     public int getWeightChange() {
         return weightChange;
+    }
+
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("name", name);
+        json.put("cost", cost);
+        json.put("weightChange", weightChange);
+        return json;
     }
 
 }
