@@ -1,13 +1,20 @@
 package model;
 
 import java.util.List;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import persistence.Writable;
+
+import java.nio.channels.WritableByteChannel;
 import java.util.ArrayList;
 
 // Represents a fully assembled vehicle with a specificed chassis, engine, transmission,
     // and a list of installed modifications. This class is responsible for aggregating
     // the stats from all its components to calculate total performance metrics like
     // horsepower, weight, and quarter-mile time.
-public class Car {
+public class Car implements Writable {
 
     private String name;
     private Chassis chassis;
@@ -132,4 +139,23 @@ public class Car {
         return chassis;
     }
 
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("name", name);
+        json.put("chassis", chassis.toJson());
+        json.put("engine", engine.toJson());
+        json.put("transmission", transmission.toJson());
+        json.put("mods", modsToJson());
+        return json;
+    }
+
+    // EFFECTS: returns mods on this car as a JSON array
+    private JSONArray modsToJson() {
+        JSONArray jsonArray = new JSONArray();
+        for (Modification m : mods) {
+            jsonArray.put(m.toJson());
+        }
+        return jsonArray;
+    }
 }

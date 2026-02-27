@@ -1,12 +1,15 @@
 package model;
 
+import org.json.JSONObject;
+
+import persistence.Writable;
 
 // Represents the vehicle's transmission system. It defines 
     // performance characteristics such as the number of
     // gears, the time it takes to shift (in milliseconds),
     // and the drivetrain's power transfer efficiency.
 
-public class Transmission {
+public class Transmission implements Writable {
 
     private String name;
     private int weight;
@@ -42,5 +45,16 @@ public class Transmission {
 
     public double getEfficiency() {
         return efficiency;
+    }
+
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("name", name);
+        json.put("weight", weight);
+        json.put("gearCount", gearCount);
+        json.put("shiftTimeMs", shiftTimeMs);
+        json.put("efficiency", efficiency);
+        return json;
     }
 }

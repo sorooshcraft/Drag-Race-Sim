@@ -1,11 +1,14 @@
 package model;
 
+import org.json.JSONObject;
+
+import persistence.Writable;
 
 // Represents the chassis/body of the vehicle. It defines the
     // car's base weight, its aerodynamic properties 
     // (drag coefficient), and physical limitations such as the 
     // maximum allowed tire width.
-public class Chassis {
+public class Chassis implements Writable {
 
     private String name;
     private int weight;
@@ -35,5 +38,15 @@ public class Chassis {
 
     public int getMaxTireWidth() {
         return maxTireWidth;
+    }
+
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("name", name);
+        json.put("weight", weight);
+        json.put("dragCoefficient", dragCoefficient);
+        json.put("maxTireWidth", maxTireWidth);
+        return json;
     }
 }

@@ -1,11 +1,13 @@
 package model;
 
+import org.json.JSONObject;
+import persistence.Writable;
 
 // Represents the vehicle's base engine. It stores fundamental
     // specifications including base horsepower, engine weight,
     // redline RPM, and cylinder count.
 
-public class Engine {
+public class Engine implements Writable {
 
     private String name;
     private int baseHorsepower;
@@ -42,5 +44,16 @@ public class Engine {
     
     public int getCylinders() {
         return cylinders;
+    }
+
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("name", name);
+        json.put("baseHorsepower", baseHorsepower);
+        json.put("weight", weight);
+        json.put("redline", redline);
+        json.put("cylinders", cylinders);
+        return json;
     }
 }
