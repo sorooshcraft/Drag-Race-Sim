@@ -1,0 +1,15 @@
+{
+    "cars":[
+        {
+            "name": "FastCar",
+            "chassis": {"name": "C", "weight": 1000, "dragCoefficient": 0.3, "maxTireWidth": 200},
+            "engine": {"name": "E", "baseHorsepower": 200, "weight": 200, "redline": 5000, "cylinders": 4},
+            "transmission": {"name": "T", "weight": 100, "gearCount": 5, "shiftTimeMs": 100, "efficiency": 0.9},
+            "mods":[
+                {"type": "EngineMod", "name": "Turbo", "cost": 1000, "weightChange": 50, "horsepowerBoost": 100},
+                {"type": "TireMod", "name": "Slicks", "cost": 500, "weightChange": 10, "gripMultiplier": 2.0},
+                {"type": "BodyPanelMod", "name": "Wing", "cost": 300, "weightChange": 15, "aeroGripMultiplier": 1.1}
+            ]
+        }
+    ]
+}
