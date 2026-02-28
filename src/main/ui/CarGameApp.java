@@ -1,12 +1,20 @@
 package ui;
 
 import model.*;
+import persistence.JsonReader;
+import persistence.JsonWriter;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Scanner;
 
 // Car Configurator & Drag Strip Simulator Application
+
 public class CarGameApp {
+    private static final String JSON_STORE = "./data/garage.json";
     private Garage garage;
     private Scanner input;
+    private JsonWriter jsonWriter;
+    private JsonReader jsonReader;
 
     // EFFECTS: runs the game application
     public CarGameApp() {
@@ -20,6 +28,7 @@ public class CarGameApp {
         String command = null;
 
         init();
+        promptLoad();
 
         while (keepRunning) {
             displayMenu();
@@ -27,6 +36,7 @@ public class CarGameApp {
             command = command.trim().toLowerCase();
 
             if (command.equals("q")) {
+                promptSave();
                 keepRunning = false;
             } else {
                 processCommand(command);
@@ -36,11 +46,13 @@ public class CarGameApp {
     }
 
     // MODIFIES: this
-    // EFFECTS: initializes the garage and scanner with correct delimiter
+    // EFFECTS: initializes the garage, scanner, and persistence tools
     private void init() {
         garage = new Garage();
         input = new Scanner(System.in);
         input.useDelimiter("\r?\n|\r");
+        jsonWriter = new JsonWriter(JSON_STORE);
+        jsonReader = new JsonReader(JSON_STORE);
     }
 
     // EFFECTS: displays menu of options to user
@@ -52,6 +64,8 @@ public class CarGameApp {
         System.out.println("\td -> view car details");
         System.out.println("\tm -> modify a car");
         System.out.println("\tr -> race a car");
+        System.out.println("\ts -> save garage to file");
+        System.out.println("\tl -> load garage from file");
         System.out.println("\tq -> quit");
         System.out.print("Enter command: ");
     }
@@ -69,6 +83,10 @@ public class CarGameApp {
             doModifyCar();
         } else if (command.equals("r")) {
             doRaceCar();
+        } else if (command.equals("s")) {
+            saveGarage();
+        } else if (command.equals("l")) {
+            loadGarage();
         } else {
             System.out.println("Selection not valid...");
         }
@@ -208,7 +226,6 @@ public class CarGameApp {
         System.out.println("Tires installed!");
     }
 
-
     // MODIFIES: c
     // EFFECTS: prompts user for tire mod specs and adds to car
     private void addCustomBodyPanelMod(Car c) {
@@ -225,7 +242,7 @@ public class CarGameApp {
         System.out.println("Body part installed!");
     }
 
-// EFFECTS: determines if race is solo or head-to-head
+    // EFFECTS: determines if race is solo or head-to-head
     private void doRaceCar() {
         if (garage.getCarCount() < 2) {
             raceSingleCar();
@@ -355,5 +372,47 @@ public class CarGameApp {
             }
         }
         System.out.println("==================================");
+    }
+
+    // EFFECTS: saves the garage to file
+    private void saveGarage() {
+        try {
+            jsonWriter.open();
+            jsonWriter.write(garage);
+            jsonWriter.close();
+            System.out.println("Saved garage to " + JSON_STORE);
+        } catch (FileNotFoundException e) {
+            System.out.println("Unable to write to file: " + JSON_STORE);
+        }
+    }
+
+    // MODIFIES: this
+    // EFFECTS: loads garage from file
+    private void loadGarage() {
+        try {
+            garage = jsonReader.read();
+            System.out.println("Loaded garage from " + JSON_STORE);
+        } catch (IOException e) {
+            System.out.println("Unable to read from file: " + JSON_STORE);
+        }
+    }
+
+    // MODIFIES: this
+    // EFFECTS: asks user if they want to load data at startup
+    private void promptLoad() {
+        System.out.print("Do you want to load your garage from file? (y/n): ");
+        String res = input.next().toLowerCase();
+        if (res.equals("y")) {
+            loadGarage();
+        }
+    }
+
+    // EFFECTS: asks user if they want to save data before quitting
+    private void promptSave() {
+        System.out.print("Do you want to save your garage before quitting? (y/n): ");
+        String res = input.next().toLowerCase();
+        if (res.equals("y")) {
+            saveGarage();
+        }
     }
 }
