@@ -6,9 +6,11 @@ import persistence.JsonWriter;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Scanner;
+import ca.ubc.cs.ExcludeFromJacocoGeneratedReport;
 
 // Car Configurator & Drag Strip Simulator Application
 
+@ExcludeFromJacocoGeneratedReport
 public class CarGameApp {
     private static final String JSON_STORE = "./data/garage.json";
     private Garage garage;
