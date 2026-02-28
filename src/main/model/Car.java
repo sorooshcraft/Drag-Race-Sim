@@ -7,7 +7,6 @@ import org.json.JSONObject;
 
 import persistence.Writable;
 
-import java.nio.channels.WritableByteChannel;
 import java.util.ArrayList;
 
 // Represents a fully assembled vehicle with a specificed chassis, engine, transmission,

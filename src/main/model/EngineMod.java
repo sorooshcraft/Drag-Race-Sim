@@ -2,8 +2,6 @@ package model;
 
 import org.json.JSONObject;
 
-import persistence.Writable;
-
 // Represents a part which modifies the car to add power 
     // (e.g., turbochargers, intakes, ECU tunes). Its primary
     //  function is to increase the vehicle's total 

@@ -1,0 +1,62 @@
+{"cars": [
+    {
+        "mods": [{
+            "horsepowerBoost": 100,
+            "cost": 1000,
+            "weightChange": 50,
+            "name": "Turbo",
+            "type": "EngineMod"
+        }],
+        "transmission": {
+            "efficiency": 0.9,
+            "shiftTimeMs": 100,
+            "name": "T",
+            "gearCount": 5,
+            "weight": 100
+        },
+        "engine": {
+            "redline": 5000,
+            "name": "E",
+            "weight": 200,
+            "baseHorsepower": 200,
+            "cylinders": 4
+        },
+        "name": "Car1",
+        "chassis": {
+            "name": "C",
+            "weight": 1000,
+            "maxTireWidth": 200,
+            "dragCoefficient": 0.3
+        }
+    },
+    {
+        "mods": [{
+            "horsepowerBoost": 100,
+            "cost": 1000,
+            "weightChange": 50,
+            "name": "Turbo",
+            "type": "EngineMod"
+        }],
+        "transmission": {
+            "efficiency": 0.9,
+            "shiftTimeMs": 100,
+            "name": "T",
+            "gearCount": 5,
+            "weight": 100
+        },
+        "engine": {
+            "redline": 5000,
+            "name": "E",
+            "weight": 200,
+            "baseHorsepower": 200,
+            "cylinders": 4
+        },
+        "name": "Car2",
+        "chassis": {
+            "name": "C",
+            "weight": 1000,
+            "maxTireWidth": 200,
+            "dragCoefficient": 0.3
+        }
+    }
+]}
