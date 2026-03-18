@@ -39,7 +39,7 @@ public class Garage implements Writable {
         return cars;
     }
 
-
+    // EFFECTS: returns this garage as a JSON object.
     @Override
     public JSONObject toJson() {
         JSONObject json = new JSONObject();

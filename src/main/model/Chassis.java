@@ -40,6 +40,7 @@ public class Chassis implements Writable {
         return maxTireWidth;
     }
 
+    // EFFECTS: returns this chassis as a JSON object.
     @Override
     public JSONObject toJson() {
         JSONObject json = new JSONObject();

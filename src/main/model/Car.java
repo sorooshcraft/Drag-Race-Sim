@@ -149,7 +149,7 @@ public class Car implements Writable {
         return json;
     }
 
-    // EFFECTS: returns mods on this car as a JSON array
+    // EFFECTS: returns this car as a JSON object.
     private JSONArray modsToJson() {
         JSONArray jsonArray = new JSONArray();
         for (Modification m : mods) {

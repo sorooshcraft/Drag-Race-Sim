@@ -46,6 +46,7 @@ public class Engine implements Writable {
         return cylinders;
     }
 
+    // EFFECTS: returns this engine as a JSON object.
     @Override
     public JSONObject toJson() {
         JSONObject json = new JSONObject();

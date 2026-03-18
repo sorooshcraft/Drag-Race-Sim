@@ -47,6 +47,7 @@ public class Transmission implements Writable {
         return efficiency;
     }
 
+    // EFFECTS: returns this transmission as a JSON object.
     @Override
     public JSONObject toJson() {
         JSONObject json = new JSONObject();

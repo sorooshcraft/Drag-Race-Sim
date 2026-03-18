@@ -41,6 +41,7 @@ public abstract class Modification implements Writable {
         return weightChange;
     }
 
+    // EFFECTS: returns the common properties of this modification as a JSON object.
     @Override
     public JSONObject toJson() {
         JSONObject json = new JSONObject();

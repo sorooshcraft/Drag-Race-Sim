@@ -28,6 +28,7 @@ public class BodyPanelMod extends Modification {
         return aeroGripMultiplier;
     }
 
+    // EFFECTS: returns this body panel modification as a JSON object.
     @Override
     public JSONObject toJson() {
         JSONObject json = super.toJson();

@@ -30,6 +30,7 @@ public class TireMod extends Modification {
         return gripMultiplier;
     }
 
+    // EFFECTS: returns this tire modification as a JSON object.
     @Override
     public JSONObject toJson() {
         JSONObject json = super.toJson();

@@ -30,6 +30,8 @@ public class EngineMod extends Modification {
         return 1.0;
     }
 
+
+    // EFFECTS: returns this engine modification as a JSON object.
     @Override
     public JSONObject toJson() {
         JSONObject json = super.toJson();
