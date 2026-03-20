@@ -23,6 +23,12 @@ public class Garage implements Writable {
         cars.add(c);
     }
 
+    // MODIFIES: this
+    // EFFECTS: removes a car to the garage
+    public void removeCar(Car c) {
+        cars.remove(c);
+    }
+
     // REQUIRES: index is within range [0, cars.size() - 1]
     // EFFECTS: returns the car at the given index
     public Car getCar(int index) {

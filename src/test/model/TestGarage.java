@@ -40,6 +40,17 @@ public class TestGarage {
         assertEquals(2, garage.getCarCount());
         assertEquals(car2, garage.getCar(1));
     }
+
+    @Test
+    void testRemoveCar() {
+        garage.addCar(car1);
+        assertEquals(1, garage.getCarCount());
+        assertEquals(car1, garage.getCar(0));
+        
+        garage.removeCar(car2);
+        assertEquals(1, garage.getCarCount());
+        assertEquals(car1, garage.getCar(0));
+    }
     
     @Test
     void testGetCars() {

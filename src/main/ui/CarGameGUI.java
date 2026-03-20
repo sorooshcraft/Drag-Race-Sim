@@ -27,6 +27,7 @@ public class CarGameGUI extends JFrame {
     private VisualPanel visualPanel;
 
     private JButton btnCreate;
+    private JButton btnRemove;
     private JButton btnModify;
     private JButton btnInstant;
     private JButton btnSimulate;
@@ -75,6 +76,7 @@ public class CarGameGUI extends JFrame {
         actionMenu = new JMenu("Actions");
         actionMenu.add(new JMenuItem(new CreateCarAction(this)));
         actionMenu.add(new JMenuItem(new ModifyCarAction(this)));
+        actionMenu.add(new JMenuItem(new RemoveCarAction(this)));
         actionMenu.add(new JMenuItem(new InstantRaceAction(this)));
         actionMenu.add(new JMenuItem(new SimulateRaceAction(this)));
         actionMenu.add(new JMenuItem(new ViewDetailsAction(this)));
@@ -114,6 +116,7 @@ public class CarGameGUI extends JFrame {
 
         btnCreate = new JButton(new CreateCarAction(this));
         btnModify = new JButton(new ModifyCarAction(this));
+        btnRemove = new JButton(new RemoveCarAction(this));
         btnInstant = new JButton(new InstantRaceAction(this));
         btnSimulate = new JButton(new SimulateRaceAction(this));
         btnView = new JButton(new ViewDetailsAction(this));
@@ -123,6 +126,7 @@ public class CarGameGUI extends JFrame {
 
         buttonPanel.add(btnCreate);
         buttonPanel.add(btnModify);
+        buttonPanel.add(btnRemove);
         buttonPanel.add(btnInstant);
         buttonPanel.add(btnSimulate);
         buttonPanel.add(btnView);
@@ -134,6 +138,7 @@ public class CarGameGUI extends JFrame {
     public void toggleUIState(boolean isRacing) {
         btnCreate.setEnabled(!isRacing);
         btnModify.setEnabled(!isRacing);
+        btnRemove.setEnabled(!isRacing);
         btnInstant.setEnabled(!isRacing);
         btnSimulate.setEnabled(!isRacing);
         btnView.setEnabled(!isRacing);
