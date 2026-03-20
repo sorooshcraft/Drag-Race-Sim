@@ -1,12 +1,16 @@
 package ui;
 
 import model.Car;
+import ca.ubc.cs.ExcludeFromJacocoGeneratedReport;
+
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 
+// A custom panel responsible for rendering the visual race animation and splash screen
+@ExcludeFromJacocoGeneratedReport
 public class VisualPanel extends JPanel {
     private BufferedImage splashImage;
     private BufferedImage car1Img;
@@ -29,11 +33,14 @@ public class VisualPanel extends JPanel {
     private final int countdownDuration = 2000;
     private int finishX;
 
+    // EFFECTS: sets background and loads the default splash image
     public VisualPanel() {
         setBackground(Color.DARK_GRAY);
         splashImage = loadSingleImage("splash.jpg");
     }
 
+    // MODIFIES: this
+    // EFFECTS: stops the race timer immediately and resets racing state
     public void stopRaceEarly() {
         if (raceTimer != null) {
             raceTimer.stop();
@@ -42,17 +49,22 @@ public class VisualPanel extends JPanel {
         repaint();
     }
 
+    // MODIFIES: this
+    // EFFECTS: initializes race variables, loads car images, and begins the animation timer
     public void animateRace(Car c1, String i1, double t1, Car c2, String i2, double t2, Runnable onFin) {
         setupAnimationVariables(c1, t1, c2, t2, onFin);
         loadCarImages(i1, i2);
         startRaceTimer();
     }
 
+    // MODIFIES: this
+    // EFFECTS: loads specific images for the racing cars from data folder
     private void loadCarImages(String path1, String path2) {
         this.car1Img = loadSingleImage(path1);
         this.car2Img = loadSingleImage(path2);
     }
 
+    // EFFECTS: returns a BufferedImage loaded from the data directory, or null if loading fails
     private BufferedImage loadSingleImage(String filename) {
         if (filename == null || filename.equals("None (Fallback)")) {
             return null;
@@ -64,6 +76,8 @@ public class VisualPanel extends JPanel {
         }
     }
 
+    // MODIFIES: this
+    // EFFECTS: sets up initial positions, durations, and text for the race animation
     private void setupAnimationVariables(Car c1, double t1, Car c2, double t2, Runnable onFin) {
         this.name1 = c1.getName();
         this.name2 = (c2 != null) ? c2.getName() : null;
@@ -77,6 +91,8 @@ public class VisualPanel extends JPanel {
         this.visualDuration2 = (t2 > 0) ? t2 * 1000.0 : 0.0;
     }
 
+    // MODIFIES: this
+    // EFFECTS: initializes and starts a Swing Timer to handle frame updates
     private void startRaceTimer() {
         isRacing = true;
         if (raceTimer != null && raceTimer.isRunning()) {
@@ -86,6 +102,8 @@ public class VisualPanel extends JPanel {
         raceTimer.start();
     }
 
+    // MODIFIES: this
+    // EFFECTS: advances the race time, handles countdown steps, and updates car positions
     private void handleRaceTick(int tickRate) {
         elapsedTime += tickRate;
         if (elapsedTime < countdownDuration) {
@@ -97,6 +115,8 @@ public class VisualPanel extends JPanel {
         repaint();
     }
 
+    // MODIFIES: this
+    // EFFECTS: calculates car positions based on elapsed time; stops timer when finish line is reached
     private void updateCarPositions() {
         double raceTime = elapsedTime - countdownDuration;
         double t1 = Math.min(1.0, raceTime / visualDuration1);
@@ -116,6 +136,7 @@ public class VisualPanel extends JPanel {
         }
     }
 
+    // EFFECTS: handles custom painting for the panel based on the current racing state
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
@@ -139,6 +160,7 @@ public class VisualPanel extends JPanel {
         }
     }
 
+    // EFFECTS: renders the countdown numbers (3, 2, 1, GO!) on the panel
     private void drawCountdownOverlay(Graphics g) {
         String text = getOverlayText();
         if (text.isEmpty()) {
@@ -155,6 +177,7 @@ public class VisualPanel extends JPanel {
         g.setFont(new Font("SansSerif", Font.PLAIN, 12));
     }
 
+    // EFFECTS: returns the text string appropriate for the current countdown step
     private String getOverlayText() {
         if (countdownStep == 1) {
             return "3";
@@ -171,6 +194,7 @@ public class VisualPanel extends JPanel {
         return "";
     }
 
+    // EFFECTS: draws the drag strip Christmas Tree (lighting system)
     private void drawChristmasTree(Graphics g) {
         int tx = startX - 60;
         g.setColor(Color.BLACK);
@@ -183,6 +207,7 @@ public class VisualPanel extends JPanel {
         drawLight(g, tx + 5, 180, Color.GREEN, countdownStep >= 4);
     }
 
+    // EFFECTS: helper to draw a single circular light on the Christmas tree
     private void drawLight(Graphics g, int x, int y, Color c, boolean isOn) {
         g.setColor(isOn ? c : Color.DARK_GRAY);
         g.fillOval(x, y, 20, 20);
@@ -190,6 +215,7 @@ public class VisualPanel extends JPanel {
         g.drawOval(x, y, 20, 20);
     }
 
+    // EFFECTS: draws the visual race track lines
     private void drawTrack(Graphics g) {
         g.setColor(Color.WHITE);
         g.drawLine(startX + 65, 0, startX + 65, getHeight());
@@ -207,6 +233,7 @@ public class VisualPanel extends JPanel {
         }
     }
 
+    // EFFECTS: draws the car image or a fallback shape if the image is missing
     private void drawCar(Graphics g, int x, int y, Color c, String name, BufferedImage img) {
         if (img != null) {
             int maxWidth = 100;
@@ -225,6 +252,7 @@ public class VisualPanel extends JPanel {
         g.drawString(name, x, y - 30);
     }
 
+    // EFFECTS: draws a basic rectangular representation of a car
     private void drawFallbackGraphic(Graphics g, int x, int y, Color c) {
         g.setColor(c);
         g.fillRect(x, y, 70, 20);
@@ -234,6 +262,7 @@ public class VisualPanel extends JPanel {
         g.fillOval(x + 45, y + 10, 20, 20);
     }
 
+    // EFFECTS: draws the main splash image, scaled to fit the panel
     private void drawSplash(Graphics g) {
         if (splashImage == null) {
             return;
@@ -247,6 +276,7 @@ public class VisualPanel extends JPanel {
         g.drawImage(splashImage, sx, sy, sw, sh, this);
     }
 
+    // EFFECTS: draws a fallback message when the splash image is not available
     private void drawFallbackSplash(Graphics g) {
         int cx = getWidth() / 2 - 100;
         int cy = getHeight() / 2;

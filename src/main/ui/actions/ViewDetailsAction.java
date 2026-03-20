@@ -2,17 +2,24 @@ package ui.actions;
 
 import model.*;
 import ui.CarGameGUI;
+import ca.ubc.cs.ExcludeFromJacocoGeneratedReport;
+
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 
+// Action class to display a comprehensive specification sheet for a selected car
+@ExcludeFromJacocoGeneratedReport
 public class ViewDetailsAction extends AbstractAction {
     private final CarGameGUI gui;
 
+    // EFFECTS: initializes the action with a name and stores the GUI reference
     public ViewDetailsAction(CarGameGUI gui) {
         super("View Details");
         this.gui = gui;
     }
 
+    // MODIFIES: gui
+    // EFFECTS: displays details of the selected car in the console; shows warning if no selection
     @Override
     public void actionPerformed(ActionEvent evt) {
         int index = gui.getCarList().getSelectedIndex();
@@ -23,6 +30,8 @@ public class ViewDetailsAction extends AbstractAction {
         }
     }
 
+    // MODIFIES: gui
+    // EFFECTS: clears the console and prints the full spec sheet for car c
     private void displayDetails(Car c) {
         gui.getDetailsArea().setText("");
         gui.printToConsole("=========================================");
@@ -34,6 +43,8 @@ public class ViewDetailsAction extends AbstractAction {
         gui.getDetailsArea().setCaretPosition(0);
     }
 
+    // MODIFIES: gui
+    // EFFECTS: prints details of chassis, engine, and transmission components
     private void printBaseComponents(Car c) {
         gui.printToConsole("--- BASE COMPONENTS ---");
         Chassis ch = c.getChassis();
@@ -49,6 +60,8 @@ public class ViewDetailsAction extends AbstractAction {
                 t.getName(), t.getWeight(), t.getGearCount(), t.getEfficiency()));
     }
 
+    // MODIFIES: gui
+    // EFFECTS: prints the list of aftermarket modifications installed on the car
     private void printModifications(Car c) {
         gui.printToConsole("-----------------------------------------");
         gui.printToConsole("--- INSTALLED MODIFICATIONS ---");
@@ -61,6 +74,8 @@ public class ViewDetailsAction extends AbstractAction {
         }
     }
 
+    // MODIFIES: gui
+    // EFFECTS: prints the aggregated performance statistics and total mod cost
     private void printSummary(Car c) {
         int totalModCost = 0;
         for (Modification m : c.getMods()) {

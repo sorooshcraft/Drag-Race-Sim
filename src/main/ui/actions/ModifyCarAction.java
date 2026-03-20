@@ -2,17 +2,24 @@ package ui.actions;
 
 import model.*;
 import ui.CarGameGUI;
+import ca.ubc.cs.ExcludeFromJacocoGeneratedReport;
+
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 
+// Action class to handle adding aftermarket modifications to an existing car
+@ExcludeFromJacocoGeneratedReport
 public class ModifyCarAction extends AbstractAction {
     private final CarGameGUI gui;
 
+    // EFFECTS: initializes the action with a name and stores the GUI reference
     public ModifyCarAction(CarGameGUI gui) {
         super("Modify Car");
         this.gui = gui;
     }
 
+    // MODIFIES: gui
+    // EFFECTS: prompts user to select a mod type for the currently selected car in the list
     @Override
     public void actionPerformed(ActionEvent evt) {
         int index = gui.getCarList().getSelectedIndex();
@@ -31,6 +38,8 @@ public class ModifyCarAction extends AbstractAction {
         }
     }
 
+    // MODIFIES: this, car
+    // EFFECTS: shows a dialog to enter specific statistics for the chosen modification type
     private void promptForModStats(Car car, String type) {
         JTextField modName = new JTextField();
         JTextField modCost = new JTextField();
@@ -49,6 +58,9 @@ public class ModifyCarAction extends AbstractAction {
         }
     }
 
+    // REQUIRES: type is one of "Engine Mod", "Tire Mod", "Body Panel Mod"
+    // MODIFIES: c, gui
+    // EFFECTS: instantiates the modification and adds it to the car; updates the GUI console
     private void applyMod(Car c, String type, String name, String cost, String weight, String spec) {
         try {
             int icost = Integer.parseInt(cost);

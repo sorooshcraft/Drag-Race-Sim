@@ -4,6 +4,7 @@ import model.*;
 import persistence.JsonReader;
 import persistence.JsonWriter;
 import ui.actions.*;
+import ca.ubc.cs.ExcludeFromJacocoGeneratedReport;
 
 import javax.swing.*;
 import java.awt.*;
@@ -12,6 +13,8 @@ import java.awt.event.WindowEvent;
 import java.io.File;
 import java.util.Vector;
 
+// Graphical User Interface for the Car Configurator & Drag Strip Simulator
+@ExcludeFromJacocoGeneratedReport
 public class CarGameGUI extends JFrame {
     private static final int WIDTH = 900;
     private static final int HEIGHT = 700;
@@ -36,6 +39,7 @@ public class CarGameGUI extends JFrame {
     private JMenu fileMenu;
     private JMenu actionMenu;
 
+    // EFFECTS: initializes fields, setup graphics, and prompts for loading data
     public CarGameGUI() {
         super("Drag Strip Simulator");
         initializeFields();
@@ -43,6 +47,8 @@ public class CarGameGUI extends JFrame {
         promptLoadOnStartup();
     }
 
+    // MODIFIES: this
+    // EFFECTS: initializes the garage, persistence tools, and list model
     private void initializeFields() {
         garage = new Garage();
         jsonWriter = new JsonWriter(JSON_STORE);
@@ -50,6 +56,8 @@ public class CarGameGUI extends JFrame {
         listModel = new DefaultListModel<>();
     }
 
+    // MODIFIES: this
+    // EFFECTS: configures the JFrame settings, adds UI components, and centers the window
     private void initializeGraphics() {
         setLayout(new BorderLayout());
         setSize(WIDTH, HEIGHT);
@@ -65,6 +73,8 @@ public class CarGameGUI extends JFrame {
         setVisible(true);
     }
 
+    // MODIFIES: this
+    // EFFECTS: creates and sets the menu bar for the application frame
     private void addMenu() {
         JMenuBar menuBar = new JMenuBar();
 
@@ -85,6 +95,8 @@ public class CarGameGUI extends JFrame {
         setJMenuBar(menuBar);
     }
 
+    // MODIFIES: this
+    // EFFECTS: initializes the JList for car selection and adds it to the west region
     private void addListPanel() {
         carList = new JList<>(listModel);
         carList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
@@ -94,6 +106,8 @@ public class CarGameGUI extends JFrame {
         add(listScrollPane, BorderLayout.WEST);
     }
 
+    // MODIFIES: this
+    // EFFECTS: initializes the visual panel and text console and adds them to the center region
     private void addCenterPanel() {
         JPanel centerPanel = new JPanel(new BorderLayout());
 
@@ -111,6 +125,8 @@ public class CarGameGUI extends JFrame {
         add(centerPanel, BorderLayout.CENTER);
     }
 
+    // MODIFIES: this
+    // EFFECTS: initializes buttons and adds them to the south region
     private void addButtonPanel() {
         JPanel buttonPanel = new JPanel(new FlowLayout());
 
@@ -135,6 +151,8 @@ public class CarGameGUI extends JFrame {
         add(buttonPanel, BorderLayout.SOUTH);
     }
 
+    // MODIFIES: this
+    // EFFECTS: toggles the enabled state of UI components based on whether a race is running
     public void toggleUIState(boolean isRacing) {
         btnCreate.setEnabled(!isRacing);
         btnModify.setEnabled(!isRacing);
@@ -148,11 +166,15 @@ public class CarGameGUI extends JFrame {
         btnEndRace.setEnabled(isRacing);
     }
 
+    // MODIFIES: this
+    // EFFECTS: positions the application window in the center of the screen
     private void centreOnScreen() {
         Dimension scrn = Toolkit.getDefaultToolkit().getScreenSize();
         setLocation((scrn.width - getWidth()) / 2, (scrn.height - getHeight()) / 2);
     }
 
+    // MODIFIES: this
+    // EFFECTS: prompts user to load garage from file upon startup
     private void promptLoadOnStartup() {
         int response = JOptionPane.showConfirmDialog(this,
                 "Do you want to load your garage from file?",
@@ -162,6 +184,8 @@ public class CarGameGUI extends JFrame {
         }
     }
 
+    // MODIFIES: this
+    // EFFECTS: handles window closing event and prompts user to save data
     private void setupWindowListener() {
         addWindowListener(new WindowAdapter() {
             @Override
@@ -177,6 +201,8 @@ public class CarGameGUI extends JFrame {
         });
     }
 
+    // MODIFIES: this
+    // EFFECTS: updates the JList model with the names of cars currently in the garage
     public void refreshList() {
         listModel.clear();
         for (int i = 0; i < garage.getCarCount(); i++) {
@@ -184,12 +210,14 @@ public class CarGameGUI extends JFrame {
         }
     }
 
+    // MODIFIES: this
+    // EFFECTS: appends text to the console details area and auto-scrolls to the bottom
     public void printToConsole(String text) {
         detailsArea.setText(detailsArea.getText() + text + "\n");
         detailsArea.setCaretPosition(detailsArea.getDocument().getLength());
     }
 
-    // Helper methods for race actions
+    // EFFECTS: returns an array of image filenames found in the data folder
     public String[] getAvailableImages() {
         File dir = new File("./data/");
         Vector<String> options = new Vector<>();
@@ -205,6 +233,9 @@ public class CarGameGUI extends JFrame {
         return options.toArray(new String[0]);
     }
 
+    // REQUIRES: f is a valid file, options is not null
+    // MODIFIES: options
+    // EFFECTS: adds file name to options if it is a valid image (png/jpg) and not a splash screen
     private void addIfImageFile(File f, Vector<String> options) {
         String name = f.getName().toLowerCase();
         boolean isImage = name.endsWith(".png") || name.endsWith(".jpg") || name.endsWith(".jpeg");
@@ -214,6 +245,8 @@ public class CarGameGUI extends JFrame {
         }
     }
 
+    // MODIFIES: this
+    // EFFECTS: prints pre-race countdown text to the console
     private void printPreRaceText() {
         printToConsole("Burnout...");
         printToConsole("Staging...");
@@ -222,6 +255,8 @@ public class CarGameGUI extends JFrame {
         printToConsole("GO!");
     }
 
+    // MODIFIES: this
+    // EFFECTS: determines race type (solo vs head-to-head) and initiates the setup
     public void handleRaceSetup(boolean isSimulated) {
         if (garage.getCarCount() == 0) {
             JOptionPane.showMessageDialog(this, "Garage is empty. Build a car first!");
@@ -247,6 +282,8 @@ public class CarGameGUI extends JFrame {
         }
     }
 
+    // MODIFIES: this
+    // EFFECTS: conducts a solo race, either instantly or with animation
     private void executeSoloRace(Car c, boolean isSimulated) {
         String img = "None (Fallback)";
         if (isSimulated) {
@@ -275,6 +312,8 @@ public class CarGameGUI extends JFrame {
         }
     }
 
+    // MODIFIES: this
+    // EFFECTS: prompts user to pick two cars/images and starts a head-to-head race
     private void executeHeadToHead(boolean isSimulated) {
         Vector<String> names = new Vector<>();
         for (Car c : garage.getCars()) {
@@ -298,6 +337,8 @@ public class CarGameGUI extends JFrame {
         }
     }
 
+    // MODIFIES: this
+    // EFFECTS: prepares data for two-car race and starts animation or instant result
     private void setupHeadToHeadRace(int idx1, String img1, int idx2, String img2, boolean isSimulated) {
         Car c1 = garage.getCar(idx1);
         Car c2 = garage.getCar(idx2);
@@ -316,11 +357,15 @@ public class CarGameGUI extends JFrame {
         }
     }
 
+    // MODIFIES: this
+    // EFFECTS: prints results and restores UI functionality after a race concludes
     private void finalizeRace(Car c1, double t1, Car c2, double t2) {
         printRaceResults(c1, t1, c2, t2);
         toggleUIState(false);
     }
 
+    // MODIFIES: this
+    // EFFECTS: prints race times for two cars and identifies the winner
     private void printRaceResults(Car c1, double t1, Car c2, double t2) {
         printToConsole("\n--- RACE RESULTS ---");
         printToConsole(String.format("%s: %.3f s", c1.getName(), t1));
@@ -335,43 +380,53 @@ public class CarGameGUI extends JFrame {
         }
     }
 
-    // Getters for actions
+    // EFFECTS: returns the garage object
     public Garage getGarage() {
         return garage;
     }
 
+    // MODIFIES: this
+    // EFFECTS: sets the garage object
     public void setGarage(Garage garage) {
         this.garage = garage;
     }
 
+    // EFFECTS: returns the list model for car names
     public DefaultListModel<String> getListModel() {
         return listModel;
     }
 
+    // EFFECTS: returns the JList component for cars
     public JList<String> getCarList() {
         return carList;
     }
 
+    // EFFECTS: returns the text area used for console output
     public JTextArea getDetailsArea() {
         return detailsArea;
     }
 
+    // EFFECTS: returns the visual panel used for animations
     public VisualPanel getVisualPanel() {
         return visualPanel;
     }
 
+    // EFFECTS: returns the JSON writer
     public JsonWriter getJsonWriter() {
         return jsonWriter;
     }
 
+    // EFFECTS: returns the JSON reader
     public JsonReader getJsonReader() {
         return jsonReader;
     }
 
+    // EFFECTS: returns the path to the JSON storage file
     public String getJsonStore() {
         return JSON_STORE;
     }
 
+    // EFFECTS: returns the button used to end a race
     public JButton getBtnEndRace() {
         return btnEndRace;
     }

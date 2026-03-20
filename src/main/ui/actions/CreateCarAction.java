@@ -2,10 +2,13 @@ package ui.actions;
 
 import model.*;
 import ui.CarGameGUI;
+import ca.ubc.cs.ExcludeFromJacocoGeneratedReport;
+
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 
-
+// Action class to handle the creation of a new custom car through a multi-field dialog
+@ExcludeFromJacocoGeneratedReport
 public class CreateCarAction extends AbstractAction {
     private final CarGameGUI gui;
     private final JTextField carNameField = new JTextField();
@@ -24,11 +27,14 @@ public class CreateCarAction extends AbstractAction {
     private final JTextField transShift = new JTextField();
     private final JTextField transEff = new JTextField();
 
+    // EFFECTS: initializes the action with a name and stores the GUI reference
     public CreateCarAction(CarGameGUI gui) {
         super("Create Custom Car");
         this.gui = gui;
     }
 
+    // MODIFIES: this
+    // EFFECTS: displays the "New Car Wizard" dialog and triggers car creation if user clicks OK
     @Override
     public void actionPerformed(ActionEvent evt) {
         Object[] message = {
@@ -48,6 +54,9 @@ public class CreateCarAction extends AbstractAction {
         }
     }
 
+    // MODIFIES: gui
+    // EFFECTS: parses text field data, creates a new Car with its components, and adds it to the garage;
+    //          shows error dialog if number formatting is incorrect.
     private void handleCarCreation() {
         try {
             Chassis c = new Chassis(chassisName.getText(), Integer.parseInt(chassisWeight.getText()),
