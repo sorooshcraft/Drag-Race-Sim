@@ -1,1 +1,62 @@
-{"cars": []}
+{"cars": [
+    {
+        "mods": [{
+            "cost": 65,
+            "weightChange": 67,
+            "aeroGripMultiplier": 67,
+            "name": "76",
+            "type": "BodyPanelMod"
+        }],
+        "transmission": {
+            "efficiency": 2,
+            "shiftTimeMs": 2,
+            "name": "2",
+            "gearCount": 2,
+            "weight": 2
+        },
+        "engine": {
+            "redline": 2,
+            "name": "2",
+            "weight": 2,
+            "baseHorsepower": 2,
+            "cylinders": 2
+        },
+        "name": "2",
+        "chassis": {
+            "name": "2",
+            "weight": 222,
+            "maxTireWidth": 2,
+            "dragCoefficient": 2
+        }
+    },
+    {
+        "mods": [{
+            "horsepowerBoost": 2,
+            "cost": 23,
+            "weightChange": 123,
+            "name": "2",
+            "type": "EngineMod"
+        }],
+        "transmission": {
+            "efficiency": 2,
+            "shiftTimeMs": 2,
+            "name": "2",
+            "gearCount": 2,
+            "weight": 2
+        },
+        "engine": {
+            "redline": 2,
+            "name": "2",
+            "weight": 2,
+            "baseHorsepower": 2,
+            "cylinders": 2
+        },
+        "name": "32",
+        "chassis": {
+            "name": "2",
+            "weight": 222,
+            "maxTireWidth": 2,
+            "dragCoefficient": 2
+        }
+    }
+]}

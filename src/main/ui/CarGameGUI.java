@@ -24,11 +24,14 @@ public class CarGameGUI extends JFrame {
     private DefaultListModel<String> listModel;
     private JList<String> carList;
     private JTextArea detailsArea;
+    private VisualPanel visualPanel;
 
     private JButton btnCreate;
     private JButton btnModify;
     private JButton btnInstant;
+    private JButton btnSimulate;
     private JButton btnView;
+    private JButton btnEndRace;
     private JMenu fileMenu;
     private JMenu actionMenu;
 
@@ -73,6 +76,7 @@ public class CarGameGUI extends JFrame {
         actionMenu.add(new JMenuItem(new CreateCarAction(this)));
         actionMenu.add(new JMenuItem(new ModifyCarAction(this)));
         actionMenu.add(new JMenuItem(new InstantRaceAction(this)));
+        actionMenu.add(new JMenuItem(new SimulateRaceAction(this)));
         actionMenu.add(new JMenuItem(new ViewDetailsAction(this)));
         menuBar.add(actionMenu);
 
@@ -91,6 +95,10 @@ public class CarGameGUI extends JFrame {
     private void addCenterPanel() {
         JPanel centerPanel = new JPanel(new BorderLayout());
 
+        visualPanel = new VisualPanel();
+        visualPanel.setPreferredSize(new Dimension(WIDTH, 250));
+        centerPanel.add(visualPanel, BorderLayout.NORTH);
+
         detailsArea = new JTextArea();
         detailsArea.setEditable(false);
         detailsArea.setFont(new Font("Monospaced", Font.PLAIN, 14));
@@ -107,12 +115,18 @@ public class CarGameGUI extends JFrame {
         btnCreate = new JButton(new CreateCarAction(this));
         btnModify = new JButton(new ModifyCarAction(this));
         btnInstant = new JButton(new InstantRaceAction(this));
+        btnSimulate = new JButton(new SimulateRaceAction(this));
         btnView = new JButton(new ViewDetailsAction(this));
+        btnEndRace = new JButton(new EndRaceAction(this));
+
+        btnEndRace.setEnabled(false);
 
         buttonPanel.add(btnCreate);
         buttonPanel.add(btnModify);
         buttonPanel.add(btnInstant);
+        buttonPanel.add(btnSimulate);
         buttonPanel.add(btnView);
+        buttonPanel.add(btnEndRace);
 
         add(buttonPanel, BorderLayout.SOUTH);
     }
@@ -121,10 +135,12 @@ public class CarGameGUI extends JFrame {
         btnCreate.setEnabled(!isRacing);
         btnModify.setEnabled(!isRacing);
         btnInstant.setEnabled(!isRacing);
+        btnSimulate.setEnabled(!isRacing);
         btnView.setEnabled(!isRacing);
         carList.setEnabled(!isRacing);
         fileMenu.setEnabled(!isRacing);
         actionMenu.setEnabled(!isRacing);
+        btnEndRace.setEnabled(isRacing);
     }
 
     private void centreOnScreen() {
@@ -244,6 +260,10 @@ public class CarGameGUI extends JFrame {
         if (isSimulated) {
             toggleUIState(true);
             printToConsole("--- SIMULATING " + c.getName() + " ---");
+            visualPanel.animateRace(c, img, time, null, null, 0, () -> {
+                printToConsole(String.format("1/4 Mile Time: %.3f seconds", time));
+                toggleUIState(false);
+            });
         } else {
             printToConsole("--- INSTANT RACE: " + c.getName() + " ---");
             printToConsole(String.format("1/4 Mile Time: %.3f seconds", time));
@@ -285,9 +305,15 @@ public class CarGameGUI extends JFrame {
         if (isSimulated) {
             toggleUIState(true);
             printToConsole("--- SIMULATING " + c1.getName() + " VS " + c2.getName() + " ---");
+            visualPanel.animateRace(c1, img1, t1, c2, img2, t2, () -> finalizeRace(c1, t1, c2, t2));
         } else {
             printRaceResults(c1, t1, c2, t2);
         }
+    }
+
+    private void finalizeRace(Car c1, double t1, Car c2, double t2) {
+        printRaceResults(c1, t1, c2, t2);
+        toggleUIState(false);
     }
 
     private void printRaceResults(Car c1, double t1, Car c2, double t2) {
@@ -325,6 +351,10 @@ public class CarGameGUI extends JFrame {
         return detailsArea;
     }
 
+    public VisualPanel getVisualPanel() {
+        return visualPanel;
+    }
+
     public JsonWriter getJsonWriter() {
         return jsonWriter;
     }
@@ -335,5 +365,9 @@ public class CarGameGUI extends JFrame {
 
     public String getJsonStore() {
         return JSON_STORE;
+    }
+
+    public JButton getBtnEndRace() {
+        return btnEndRace;
     }
 }

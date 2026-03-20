@@ -62,6 +62,7 @@ public class ModifyCarAction extends AbstractAction {
             }
             gui.getDetailsArea().setText("");
             gui.printToConsole("Successfully installed " + name + "!");
+            gui.getVisualPanel().repaint();
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(gui, "Invalid input.", "Error", JOptionPane.ERROR_MESSAGE);
         }
