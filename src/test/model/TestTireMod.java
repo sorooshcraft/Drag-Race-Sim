@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.json.JSONObject;
 
 public class TestTireMod {
     private TireMod testSlicks;
@@ -31,5 +32,15 @@ public class TestTireMod {
     @Test
     void testCalculateGripMultiplier() {
         assertEquals(2.5, testSlicks.getGripMultiplier());
+    }
+
+    @Test
+    void testToJson() {
+        JSONObject json = testSlicks.toJson();
+        assertEquals("Racing Slicks", json.getString("name"));
+        assertEquals(800, json.getInt("cost"));
+        assertEquals(30, json.getInt("weightChange"));
+        assertEquals("TireMod", json.getString("type"));
+        assertEquals(2.5, json.getDouble("gripMultiplier"));
     }
 }

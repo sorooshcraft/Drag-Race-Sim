@@ -3,6 +3,7 @@ package model;
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.json.JSONObject;
 
 public class TestBodyPanelMod {
 
@@ -36,5 +37,15 @@ public class TestBodyPanelMod {
     void testCalculateGripMultiplier() {
         assertEquals(1.0, carbonHood.getGripMultiplier());
         assertEquals(1.2, hugeSpoiler.getGripMultiplier());
+    }
+
+    @Test
+    void testToJson() {
+        JSONObject json = carbonHood.toJson();
+        assertEquals("Carbon Hood", json.getString("name"));
+        assertEquals(1000, json.getInt("cost"));
+        assertEquals(-20, json.getInt("weightChange"));
+        assertEquals("BodyPanelMod", json.getString("type"));
+        assertEquals(1.0, json.getDouble("aeroGripMultiplier"));
     }
 }
