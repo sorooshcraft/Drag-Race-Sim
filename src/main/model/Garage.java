@@ -12,21 +12,29 @@ public class Garage implements Writable {
 
     private List<Car> cars;
 
+    EventLog eventLog;
+
     // EFFECTS: constructs an empty garage
     public Garage() {
         cars = new ArrayList<>();
+
+        eventLog = EventLog.getInstance();
     }
 
     // MODIFIES: this
     // EFFECTS: adds a car to the garage
     public void addCar(Car c) {
         cars.add(c);
+
+        EventLog.getInstance().logEvent(new Event("Car '" + c.getName() + "' added to garage"));
     }
 
     // MODIFIES: this
     // EFFECTS: removes a car to the garage
     public void removeCar(Car c) {
         cars.remove(c);
+
+        EventLog.getInstance().logEvent(new Event("Car '" + c.getName() + "' removed from garage"));
     }
 
     // REQUIRES: index is within range [0, cars.size() - 1]

@@ -32,3 +32,17 @@ This project interests me because it combines the two things that interest me th
 - You can locate my visual component by looking at the center panel of the application; it displays a splash screen image on startup and shows a full race animation with a countdown and moving car graphics when you click the "Simulate Race" button.
 - You can save the state of my application by going to the "File" menu and selecting "Save Garage," or by clicking "Yes" when the application prompts you to save before quitting.
 - You can reload the state of my application by going to the "File" menu and selecting "Load Garage," or by clicking "Yes" when the application asks if you want to load your data during startup.
+
+# Phase 4: Task 2
+
+Wed Mar 25 16:40:27 PDT 2026
+Car 'car1' added to garage
+
+Wed Mar 25 16:41:00 PDT 2026
+Car 'car2' added to garage
+
+Wed Mar 25 16:41:26 PDT 2026
+Modification 'turbo' added to car 'car1'
+
+Wed Mar 25 16:41:32 PDT 2026
+Car 'car2' removed from garage

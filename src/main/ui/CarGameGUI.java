@@ -196,6 +196,11 @@ public class CarGameGUI extends JFrame {
                 if (response == JOptionPane.YES_OPTION) {
                     new SaveAction(CarGameGUI.this).actionPerformed(null);
                 }
+
+                for (model.Event nextEvent : model.EventLog.getInstance()) {
+                    System.out.println(nextEvent.toString() + "\n");
+                }
+
                 System.exit(0);
             }
         });

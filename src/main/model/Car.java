@@ -21,6 +21,8 @@ public class Car implements Writable {
     private Transmission transmission;
     private List<Modification> mods;
 
+    private EventLog eventLog;
+
     // REQUIRES: carName has a non-zero length
     // EFFECTS: variables are stored and initialized. 
     public Car(String carName, Chassis chassis, Engine engine, Transmission transmission) {
@@ -29,6 +31,8 @@ public class Car implements Writable {
         this.engine = engine;
         this.transmission = transmission;
         this.mods = new ArrayList<>();
+
+        eventLog = EventLog.getInstance();
     }
 
     // EFFECTS: returns the total horsepower of this car object, 
@@ -39,6 +43,7 @@ public class Car implements Writable {
         for (Modification m : mods) {
             totalHP += m.getHorsepowerGain(engine);
         }
+
         return totalHP;
     }
 
@@ -53,6 +58,7 @@ public class Car implements Writable {
         for (Modification m : mods) {
             totalWeight += m.getWeightChange();
         }
+
         return totalWeight;
     }
 
@@ -62,6 +68,7 @@ public class Car implements Writable {
         for (Modification m : mods) {
             totalGrip *= m.getGripMultiplier();
         }
+
         return totalGrip;
     }
 
@@ -88,6 +95,7 @@ public class Car implements Writable {
     public void addMod(Modification mod) {
         mods.add(mod);
 
+        eventLog.logEvent(new Event("Modification '" + mod.getName() + "' added to car '" + name + "'"));
     }
     
 
@@ -96,6 +104,8 @@ public class Car implements Writable {
     // EFFECTS: sets the name of the car
     public void setName(String name) {
         this.name = name;
+
+        eventLog.logEvent(new Event("Car renamed to '" + name + "'"));
     }
     
 
@@ -103,18 +113,22 @@ public class Car implements Writable {
     // EFFECTS: changes the engine of the car
     public void setEngine(Engine engine) {
         this.engine = engine;
+        eventLog.logEvent(new Event("Engine set to '" + engine.getName() + "' for car '" + name + "'"));    
     }
 
     // MODIFIES: this
     // EFFECTS: changes the transmission of the car
     public void setTransmission(Transmission transmission) {
         this.transmission = transmission;
+        eventLog.logEvent(new Event("Transmission changed for car '" + name + "'"));
+
     }
     
     // MODIFIES: this
     // EFFECTS: changes the chassis of the car
     public void setChassis(Chassis chassis) {
         this.chassis = chassis;
+        eventLog.logEvent(new Event("Chassis changed for car '" + name + "'"));
     }
 
     
