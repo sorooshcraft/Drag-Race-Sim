@@ -46,3 +46,9 @@ Modification 'turbo' added to car 'car1'
 
 Wed Mar 25 16:41:32 PDT 2026
 Car 'car2' removed from garage
+
+# Phase 4: Task 3
+
+If I had more time to work on this project, I would refactor the 'God Class' currently forming in my `CarGameGUI` class. At the moment, `CarGameGUI` suffers from low cohesion. It is responsible for setting up the Java Swing window, instantiating UI components, managing the persistence layer, and handling the complex logic required to set up, calculate, and coordinate the drag races (e.g., `handleRaceSetup`, `executeSoloRace`, and `setupHeadToHeadRace`). 
+
+To improve the design, I would extract the racing and simulation logic into a separate `RaceManager` or `SimulationController` class. `CarGameGUI` would hold a reference to this new class and delegate any racing tasks to it. This would uphold the Single Responsibility Principle, as `CarGameGUI` would only be responsible for drawing the user interface and capturing user inputs, while the `RaceManager` would be entirely responsible for comparing car statistics, calculating quarter-mile times, and returning the race results. Additionally, I would use the Observer Pattern so the `VisualPanel` can automatically listen to ticks from the `RaceManager` rather than having the GUI manually coordinate the visual state. This would drastically decouple my UI code from my simulation logic, making the code much easier to read, test, and maintain.

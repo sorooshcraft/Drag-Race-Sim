@@ -197,6 +197,7 @@ public class CarGameGUI extends JFrame {
                     new SaveAction(CarGameGUI.this).actionPerformed(null);
                 }
 
+                System.out.println("\nEvent Log:");
                 for (model.Event nextEvent : model.EventLog.getInstance()) {
                     System.out.println(nextEvent.toString() + "\n");
                 }
